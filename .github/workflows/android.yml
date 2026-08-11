@@ -49,6 +49,12 @@ jobs:
         run: |
           sed -i '1i import groovy.xml.XmlParser' platforms/android/CordovaLib/cordova.gradle || true
 
+      - name: Downgrade Gradle wrapper to 8.7 (cordova-android 11 compat)
+        run: |
+          sed -i 's|gradle-[0-9.]*-.*-all.zip|gradle-8.7-all.zip|g' platforms/android/gradle/wrapper/gradle-wrapper.properties || true
+          # Force gradle 8.7 if line still uses newer version
+          sed -i 's|distributionUrl=.*|distributionUrl=https\\://services.gradle.org/distributions/gradle-8.7-all.zip|g' platforms/android/gradle/wrapper/gradle-wrapper.properties || true
+
       - name: Build APK (debug)
         run: cordova build android --debug
 
@@ -99,6 +105,12 @@ jobs:
       - name: Patch cordova.gradle for Gradle 9 compatibility
         run: |
           sed -i '1i import groovy.xml.XmlParser' platforms/android/CordovaLib/cordova.gradle || true
+
+      - name: Downgrade Gradle wrapper to 8.7 (cordova-android 11 compat)
+        run: |
+          sed -i 's|gradle-[0-9.]*-.*-all.zip|gradle-8.7-all.zip|g' platforms/android/gradle/wrapper/gradle-wrapper.properties || true
+          # Force gradle 8.7 if line still uses newer version
+          sed -i 's|distributionUrl=.*|distributionUrl=https\\://services.gradle.org/distributions/gradle-8.7-all.zip|g' platforms/android/gradle/wrapper/gradle-wrapper.properties || true
 
       - name: Build Release APK (unsigned)
         run: cordova build android --release
