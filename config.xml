@@ -36,12 +36,7 @@
     <plugin name="cordova-plugin-splashscreen" spec="^6.0.2" />
 
     <!-- Placeholder icon (override via res/) -->
-    <platform name="android">
-        <icon density="ldpi" src="res/icon/android/ldpi.png" />
-        <icon density="mdpi" src="res/icon/android/mdpi.png" />
-        <icon density="hdpi" src="res/icon/android/hdpi.png" />
-        <icon density="xhdpi" src="res/icon/android/xhdpi.png" />
-        <icon density="xxhdpi" src="res/icon/android/xxhdpi.png" />
-        <icon density="xxxhdpi" src="res/icon/android/xxxhdpi.png" />
-    </platform>
+    <!-- Placeholder icon (override via res/) -->
+    <!-- Icon dihapus: tidak ada file res/icon/android/*.png, dan icon bukan wajib untuk build APK -->
+
 </widget>
