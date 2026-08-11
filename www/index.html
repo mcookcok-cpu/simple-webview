@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content: https:;">
+  <title>Simple Browser</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Toolbar -->
+  <header class="toolbar" id="toolbar">
+    <div class="nav-buttons">
+      <button class="btn-nav" id="btnBack" title="Back" disabled>←</button>
+      <button class="btn-nav" id="btnForward" title="Forward" disabled>→</button>
+      <button class="btn-nav" id="btnRefresh" title="Refresh">⟳</button>
+    </div>
+    <div class="app-title">Simple Browser</div>
+  </header>
+
+  <!-- URL Bar -->
+  <div class="url-bar">
+    <span class="url-icon" id="urlIcon">🔒</span>
+    <input type="text" id="urlInput" placeholder="Masukkan URL..." value="https://example.com">
+    <button class="btn-go" id="btnGo">Go</button>
+  </div>
+
+  <!-- Pull-to-refresh indicator -->
+  <div class="ptr-indicator" id="ptrIndicator">
+    <span class="ptr-text" id="ptrText">↓ Tarik untuk refresh</span>
+  </div>
+
+  <!-- Loading indicator -->
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- WebView container -->
+  <main class="webview-container" id="webviewContainer">
+    <iframe id="webview" src="https://example.com" sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-downloads"></iframe>
+  </main>
+
+  <!-- TTS Button -->
+  <footer class="tts-bar">
+    <button class="btn-tts" id="btnTTS">🔊 TTS</button>
+    <button class="btn-tts btn-tts-stop" id="btnTTSStop" style="display:none;">⏹ Stop</button>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

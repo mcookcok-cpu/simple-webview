@@ -1,0 +1,265 @@
+/* =============================================
+   Simple WebView - V1 Stylesheet
+   ============================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  --bg: #ffffff;
+  --bg-alt: #f4f4f5;
+  --border: #e4e4e7;
+  --text: #18181b;
+  --text-muted: #71717a;
+  --primary: #2563eb;
+  --danger: #dc2626;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  overscroll-behavior-y: contain;
+}
+
+/* Toolbar */
+.toolbar {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  height: 48px;
+  flex-shrink: 0;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.btn-nav {
+  width: 38px;
+  height: 38px;
+  border: none;
+  background: var(--bg-alt);
+  border-radius: 6px;
+  font-size: 18px;
+  cursor: pointer;
+  color: var(--text);
+  transition: background 0.15s;
+}
+
+.btn-nav:active {
+  background: #d4d4d8;
+}
+
+.btn-nav:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.app-title {
+  margin-left: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+/* URL Bar */
+.url-bar {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 8px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.url-icon {
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+#urlInput {
+  flex: 1;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  font-size: 13px;
+  background: var(--bg-alt);
+  color: var(--text);
+  outline: none;
+  font-family: inherit;
+}
+
+#urlInput:focus {
+  border-color: var(--primary);
+  background: var(--bg);
+}
+
+.btn-go {
+  height: 36px;
+  padding: 0 16px;
+  border: none;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 18px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-go:active {
+  opacity: 0.85;
+}
+
+/* Pull-to-refresh indicator */
+.ptr-indicator {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  height: 0;
+  overflow: hidden;
+  background: var(--bg-alt);
+  text-align: center;
+  transition: height 0.15s ease-out;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.ptr-indicator.visible {
+  height: 44px;
+}
+
+.ptr-text {
+  display: inline-block;
+  line-height: 44px;
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.ptr-indicator.refreshing .ptr-text::before {
+  content: "↻ ";
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Loading */
+.loading {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: transparent;
+  z-index: 20;
+  display: none;
+}
+
+.loading.show {
+  display: block;
+}
+
+.loading::after {
+  content: '';
+  display: block;
+  height: 100%;
+  width: 30%;
+  background: var(--primary);
+  animation: progress 1.2s infinite ease-in-out;
+}
+
+@keyframes progress {
+  0%   { margin-left: -30%; }
+  100% { margin-left: 100%; }
+}
+
+/* WebView */
+.webview-container {
+  flex: 1;
+  position: relative;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+#webview {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  background: var(--bg);
+}
+
+/* TTS Bar */
+.tts-bar {
+  display: flex;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.btn-tts {
+  flex: 1;
+  height: 44px;
+  border: none;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-tts:active {
+  opacity: 0.85;
+}
+
+.btn-tts-stop {
+  flex: 0 0 90px;
+  background: var(--danger);
+}
+
+/* Landscape */
+@media (orientation: landscape) {
+  .toolbar { height: 42px; padding: 6px 10px; }
+  .btn-nav { width: 34px; height: 34px; font-size: 16px; }
+  .url-bar { padding: 6px 10px; }
+  .tts-bar { padding: 6px 10px; }
+  .btn-tts { height: 38px; font-size: 13px; }
+  .ptr-indicator { top: 88px; }
+  .loading { top: 88px; }
+}
+
+/* Tablets & small landscape screens */
+@media (min-width: 600px) {
+  body { font-size: 15px; }
+  .btn-nav { width: 42px; height: 42px; font-size: 20px; }
+  #urlInput { height: 40px; font-size: 14px; }
+  .btn-go { height: 40px; padding: 0 20px; font-size: 14px; }
+  .btn-tts { height: 48px; font-size: 16px; }
+}
