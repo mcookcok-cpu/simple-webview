@@ -49,11 +49,13 @@ jobs:
         run: |
           sed -i '1i import groovy.xml.XmlParser' platforms/android/CordovaLib/cordova.gradle || true
 
-      - name: Downgrade Gradle wrapper to 8.7 (cordova-android 11 compat)
+      - name: Install Gradle 8.7 (cordova-android 11 AGP compat)
         run: |
-          sed -i 's|gradle-[0-9.]*-.*-all.zip|gradle-8.7-all.zip|g' platforms/android/gradle/wrapper/gradle-wrapper.properties || true
-          # Force gradle 8.7 if line still uses newer version
-          sed -i 's|distributionUrl=.*|distributionUrl=https\\://services.gradle.org/distributions/gradle-8.7-all.zip|g' platforms/android/gradle/wrapper/gradle-wrapper.properties || true
+          sudo apt-get remove -y gradle || true
+          wget -q https://services.gradle.org/distributions/gradle-8.7-bin.zip -O /tmp/gradle-8.7.zip
+          unzip -q /tmp/gradle-8.7.zip -d /opt/
+          echo "/opt/gradle-8.7/bin" >> $GITHUB_PATH
+          gradle --version
 
       - name: Build APK (debug)
         run: cordova build android --debug
@@ -106,11 +108,13 @@ jobs:
         run: |
           sed -i '1i import groovy.xml.XmlParser' platforms/android/CordovaLib/cordova.gradle || true
 
-      - name: Downgrade Gradle wrapper to 8.7 (cordova-android 11 compat)
+      - name: Install Gradle 8.7 (cordova-android 11 AGP compat)
         run: |
-          sed -i 's|gradle-[0-9.]*-.*-all.zip|gradle-8.7-all.zip|g' platforms/android/gradle/wrapper/gradle-wrapper.properties || true
-          # Force gradle 8.7 if line still uses newer version
-          sed -i 's|distributionUrl=.*|distributionUrl=https\\://services.gradle.org/distributions/gradle-8.7-all.zip|g' platforms/android/gradle/wrapper/gradle-wrapper.properties || true
+          sudo apt-get remove -y gradle || true
+          wget -q https://services.gradle.org/distributions/gradle-8.7-bin.zip -O /tmp/gradle-8.7.zip
+          unzip -q /tmp/gradle-8.7.zip -d /opt/
+          echo "/opt/gradle-8.7/bin" >> $GITHUB_PATH
+          gradle --version
 
       - name: Build Release APK (unsigned)
         run: cordova build android --release
